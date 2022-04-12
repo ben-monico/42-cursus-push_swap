@@ -1,0 +1,12 @@
+.DS_Store
+.vscode
+.idea
+*.swp
+*/*.swp
+*.o
+*/*.o
+*.a
+*.gch
+*.out
+checker_Mac
+push_swap
