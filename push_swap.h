@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:57:03 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/09 23:08:51 by benmonico        ###   ########.fr       */
+/*   Updated: 2022/04/12 19:33:39 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ long	ft_atoi(const char *str);
 t_node *ft_atoiton(char **str);
 int		ft_checksort(t_stack *stack);
 int		ft_dup_check(t_node *ptr);
+char	*ft_findnext(int	mindex, int maxindex, t_stack *bstk);
 t_node	*ft_find_head(t_node *ptr);
 t_node	*ft_find_tail(t_node *ptr);
 int		ft_free(char **str);
