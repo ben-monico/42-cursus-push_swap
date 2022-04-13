@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:57:03 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/12 19:33:39 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/13 18:56:29 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,12 @@ typedef struct s_array {
 } t_array;
 
 long	ft_atoi(const char *str);
-t_node *ft_atoiton(char **str);
+t_node	*ft_atoiton(char **str);
 int		ft_checksort(t_stack *stack);
 int		ft_dup_check(t_node *ptr);
-char	*ft_findnext(int	mindex, int maxindex, t_stack *bstk);
+int		ft_findnext(int	mindex, int maxindex, t_stack *stack);
 t_node	*ft_find_head(t_node *ptr);
+t_node	*ft_find_index(t_node *ptr, int ind);
 t_node	*ft_find_tail(t_node *ptr);
 int		ft_free(char **str);
 int		ft_isdigit(int c);

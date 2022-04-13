@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_utils_list_b.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 17:05:28 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/09 23:50:10 by benmonico        ###   ########.fr       */
+/*   Updated: 2022/04/13 18:20:44 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,17 @@ int	ft_checksort(t_stack *stack)
 			return (0);
 		ptr = ptr->next;
 	}
-	ft_putstr("Sorted baby\n");
 	return (1);
+}
+
+t_node	*ft_find_index(t_node *ptr, int ind)
+{
+	ptr = ft_find_head(ptr);
+	while (ptr->index != ind)
+	{
+		ptr = ptr->next;
+	}
+	return (ptr);
 }
 
 void	ft_setindex(t_stack *stack)
@@ -84,13 +93,13 @@ void	ft_setindex(t_stack *stack)
 		i++;
 	}
 	//
-	ft_putstr("array: ");
-	i = 0;
-	while (i < stack->size)
-	{
-		ft_putnbr(arr[i]);
-		i++;
-	}
+	// ft_putstr("array: ");
+	// i = 0;
+	// while (i < stack->size)
+	// {
+	// 	ft_putnbr(arr[i]);
+	// 	i++;
+	// }
 	//
 	i = 0;
 	while (i < stack->size)
@@ -104,20 +113,20 @@ void	ft_setindex(t_stack *stack)
 		i++;
 	}
 	//
-	ft_putstr("\n sorted array: ");
-	i = 0;
-	while (i < stack->size)
-	{
-		ft_putnbr(arr[i]);
-		i++;
-	}
-	ft_putstr("\nindexs: ");
-	ptr = stack->head;
-	while (ptr)
-	{
-		ft_putnbr(ptr->index);
-		ptr = ptr->next;
-	}
+	// ft_putstr("\n sorted array: ");
+	// i = 0;
+	// while (i < stack->size)
+	// {
+	// 	ft_putnbr(arr[i]);
+	// 	i++;
+	// }
+	// ft_putstr("\nindexs: ");
+	// ptr = stack->head;
+	// while (ptr)
+	// {
+	// 	ft_putnbr(ptr->index);
+	// 	ptr = ptr->next;
+	// }
 	//
 	ptr = stack->head;
 	while (ptr)
@@ -129,13 +138,13 @@ void	ft_setindex(t_stack *stack)
 		ptr = ptr->next;
 	}
 	//
-	ft_putstr("\nindexs sorted: ");
-	ptr = stack->head;
-	while (ptr)
-	{
-		ft_putnbr(ptr->index);
-		ptr = ptr->next;
-	}
+	// ft_putstr("\nindexs sorted: ");
+	// ptr = stack->head;
+	// while (ptr)
+	// {
+	// 	ft_putnbr(ptr->index);
+	// 	ptr = ptr->next;
+	// }
 	//
 	return ;
 }
