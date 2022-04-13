@@ -3,17 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:10:26 by bcarreir          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/04/12 19:57:43 by bcarreir         ###   ########.fr       */
+=======
+/*   Updated: 2022/04/13 04:01:14 by benmonico        ###   ########.fr       */
+>>>>>>> refs/remotes/origin/master
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 // list to array. index array. push to list when they are the next index
 
-char	*ft_findnext(int	mindex, int maxindex, t_stack *bstk) // find cheapest next index to push
+int	*ft_findnext(int	mindex, int maxindex, t_stack *bstk) // find cheapest next index to push
 {
 	t_node *ptr;
 	int	r;
@@ -34,22 +38,23 @@ char	*ft_findnext(int	mindex, int maxindex, t_stack *bstk) // find cheapest next
 		ptr = ptr->prev;
 	}
 	if (r < rr)
-		return ("r");
-	return ("rr");
+		return (1); //rot
+	return (0);		//rev rot
 }
 
 void	ft_sort(t_stack *astk, t_stack *bstk)
 {
 	t_node	*ptr;
 	t_node	*bptr;
-	char	rot;
 	int		mindex;
 	int		maxindex;
 
 	mindex = 0;
 	ptr = astk->head;
 	maxindex = ptr->index;
-	while (ptr || (ptr->index == 0 && mindex > 0)) //push to b except for sequenced indexs. a.head is ind 0
+	//iterate back and forth to find biggest sequence including 0. push all except those
+	//find cheapest next to push and ra or rra	
+	while (ptr || (ptr->index == 0 && mindex > 0)) //push to b except for sequenced indexs.
 	{
 		if (ptr->index == mindex)
 		{
@@ -64,14 +69,10 @@ void	ft_sort(t_stack *astk, t_stack *bstk)
 	}
 	while (bstk->head) //rotate or rev rotate stack b depending on next index returned
 	{
-		rot = ft_findnext(mindex, maxindex, bstk);	
-		if (rot == "r") // rotate until next
-		{
-			bptr = bstk->head;
+		bptr = bstk->head;
+		if (ft_findnext(mindex, maxindex, bstk)) // rotate until next
 			while (bptr && (bptr->index != mindex + 1 || bptr->index != maxindex))
 				ft_rb(bstk);
-			mindex++;
-		}
 		else //rev rotate until next
 		{
 			bptr = bstk->tail;
@@ -81,13 +82,13 @@ void	ft_sort(t_stack *astk, t_stack *bstk)
 		ft_pa(bstk, astk);
 		if (astk->head == mindex + 1)
 		{
-			ft_ra(astk);
+			ft_ra(astk); //check if findnext in b is worth doing rr
 			mindex++;
 		}
 		else
-			maxindex;
+			maxindex--;
 	}
-	while (astk->head->index != 0) //rotate or rev rotate dependeing on 0 idnex position in list
+	while (astk->head->index != 0) //rotate or rev rotate dependeing on 0 idnex position in list. make ind 0 - head astk
 	{
 		
 	}
