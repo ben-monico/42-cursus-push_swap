@@ -6,14 +6,14 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:10:26 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/15 16:59:24 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/15 18:59:06 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 // list to array. index array. push to list when they are the next index
 
-int	ft_circsort(t_stack *a, int mindex, int maxindex)
+int	ft_only_seq(t_stack *a, int mindex, int maxindex)
 {
 	t_node *ptr;
 
@@ -82,7 +82,7 @@ void	ft_sort(t_stack *a, t_stack *b)
 	}
 	if (maxindex == a->size)
 		maxindex = 0;
-	while (!ft_circsort(a, mindex, maxindex)) //push to b except for sequenced indexs.
+	while (!ft_only_seq(a, mindex, maxindex)) //push to b except for sequenced indexs.
 	{
 		if ((maxindex != 0 && a->head->index >= maxindex) || a->head->index <= mindex)
 				ft_ra(a);
