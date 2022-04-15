@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 17:05:28 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/13 18:20:44 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/15 16:30:31 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ int	ft_lstsize(t_node *ptr)
 	return (lstsize);
 }
 
-void	ft_printlist(t_stack *astk, t_stack *bstk)
+void	ft_printlist(t_stack *a, t_stack *b)
 {
 	t_node *aptr;
 	t_node *bptr;
 
-	aptr = astk->head;
-	bptr = bstk->head;
+	aptr = a->head;
+	bptr = b->head;
 	ft_putstr("__________\nA	B\n----------\n");
 	while (aptr || bptr)
 	{

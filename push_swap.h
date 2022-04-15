@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:57:03 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/13 18:56:29 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/15 17:44:14 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		ft_isdigit(int c);
 void	ft_lstclear(t_node **lst);
 int		ft_lstsize(t_node *ptr);
 int		ft_parse_args(t_stack *a, int argc, char **argv);
-void	ft_printlist(t_stack *astk, t_stack *bstk);
+void	ft_printlist(t_stack *a, t_stack *b);
 void	ft_putchar(char c);
 void	ft_putnbr(int n);
 void	ft_putstr(char *s);
