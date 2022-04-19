@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_utils_libft_b.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 15:52:09 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/09 21:54:13 by benmonico        ###   ########.fr       */
+/*   Updated: 2022/04/18 17:52:25 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,38 @@ void	ft_swap_int(int *a, int *b)
 	aux = *a;
 	*a = *b;
 	*b = aux;
+}
+
+void	*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	unsigned int	i;
+	char			*s;
+	char			*d;
+
+	i = 0;
+	d = (char *)dst;
+	s = (char *)src;
+	while (i < n)
+	{
+		d[i] = s[i];
+		i++;
+	}
+	return (dst);
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	unsigned int	i;
+	unsigned char	*ptr;
+
+	i = 0;
+	ptr = malloc(count * size);
+	if (ptr == NULL)
+		return (0);
+	while (i < count * size)
+	{
+		ptr[i] = 0;
+		i++;
+	}
+	return (ptr);
 }
