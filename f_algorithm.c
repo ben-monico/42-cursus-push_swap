@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:17:33 by benmonico         #+#    #+#             */
-/*   Updated: 2022/04/18 16:18:47 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/19 19:17:40 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,15 @@ int	ft_findnext(int	mindex, int maxindex, t_stack *stack) // find cheapest next 
 	int	rr;
 
 	r = 0;
+	if (!stack->head || !stack->head->next)
+		return (0);
 	ptr = stack->head;
 	while (ptr && ptr->index != mindex && ptr->index != maxindex)
 	{
 		r++;
 		ptr = ptr->next;
 	}
-	rr = 0;
+	rr = 1;
 	ptr = stack->tail;
 	while (ptr && ptr->index != mindex && ptr->index != maxindex)
 	{

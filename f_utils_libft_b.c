@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 15:52:09 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/18 17:52:25 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/19 14:55:49 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,18 @@ void	*ft_calloc(size_t count, size_t size)
 		i++;
 	}
 	return (ptr);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	unsigned int	i;
+	unsigned char	*c;
+
+	c = s;
+	i = 0;
+	while (i < n)
+	{
+		c[i] = '\0';
+		i++;
+	}
 }
