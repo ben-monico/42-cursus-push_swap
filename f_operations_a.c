@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:41:14 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/13 15:25:04 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/20 16:06:19 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,8 @@ void	ft_rb(t_stack *b_stack)
 void	ft_rr(t_stack *a_stack, t_stack *b_stack)
 {
 	ft_putstr("rr\n");
-	ft_ra(a_stack);
-	ft_rb(b_stack);
+	ft_rotation(a_stack);
+	ft_rotation(b_stack);
 }
 
 void	ft_rra(t_stack *a_stack)

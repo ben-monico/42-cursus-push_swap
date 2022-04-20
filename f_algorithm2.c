@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:22:13 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/19 19:25:42 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/20 18:56:38 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,19 +84,40 @@ int	*ft_findsequence(t_stack *a)
 	return (best);
 }
 
+int	ft_maxind(t_stack *stack)
+{
+	t_node	*aptr;
+	int		maxindex;
+
+	if (!stack->head->next)
+		return(stack->head->index);
+	maxindex = 0;
+	aptr = stack->head;
+	while (aptr)
+	{
+		if (aptr->index > maxindex)
+			maxindex = aptr->index;
+		aptr = aptr->next;
+	}
+	return (maxindex);
+}
+
 t_node	*getaptr(t_stack *a, t_node *bptr)
 {
 	t_node *aptr;
+	int	maxindex;
 
-	if (!a->head->next)
-		return (a->head);
-	if (bptr->index > a->tail->index && bptr->index < a->head->index)
+	maxindex = ft_maxind(a);
+	if (maxindex < bptr->index && a->tail->index == maxindex)
 		return (a->head);
 	aptr = a->head;
-	while (aptr)
+	if (bptr->index > a->tail->index && bptr->index < aptr->index)
+		return (a->head);
+	while (aptr->next)
 	{
 		if (aptr->prev)
-			if (!aptr->next || (aptr->index > bptr->index && aptr->prev->index < bptr->index))
+			if ((aptr->index > bptr->index && aptr->prev->index < bptr->index) ||
+				(maxindex < bptr->index && aptr->prev->index == maxindex))
 				break;
 		aptr = aptr->next;
 	}
@@ -107,7 +128,7 @@ int	ft_nodecounter(t_stack *stack, t_node *ptr, int i)
 {
 	t_node	*aux;
 	int		count;
-
+	
 	count = 0;
 	if (i == 1)
 		aux = stack->head;
@@ -144,69 +165,106 @@ t_node	*ft_nextpush(t_stack *a, t_stack *b)
 
 	while (bptr)
 	{
-		// write (1, "aptr\n", 5);
 		aptr = getaptr(a, bptr);
-				// write (1, "c", 1);
 		bcounter = ft_nodecounter(b, bptr, ft_findnext(bptr->index, bptr->index, b));
-				// write (1, "f", 1);
 		acounter = ft_nodecounter(a, aptr, ft_findnext(aptr->index, aptr->index, a));
-				// write (1, "d", 1);
 		if (acounter + bcounter < cheap || cheap == -1)
 		{
 			cheap = acounter + bcounter;
 			chpptr = bptr;
 		}
-				// write (1, "g", 1);
 		bptr = bptr->next;
-				// write (1, "nexted\n", 7);
 	}
-				// write (1, "success", 7);
 	return (chpptr);
+}
+
+t_node	*ft_get_next_unseq(t_stack *a, int *seq)
+{
+	t_node	*ptrh;
+	t_node	*ptrt;
+
+	ptrh = a->head;
+	ptrt = a->tail;
+	while (ptrh && ptrt)
+	{
+		if (!ft_isseq(seq, ptrh->index))
+			return (ptrh);
+		if (!ft_isseq(seq, ptrt->index))
+			return(ptrt);
+		ptrh = ptrh->next;
+		ptrt = ptrt->prev;
+	}
+	return (NULL);
 }
 
 char	*ft_algo2(t_stack *a, t_stack *b)
 {
-	int *seq;
 	t_node	*ptr;
 	t_node	*aptr;
+	// t_node	*next;
+	int *seq;
 	int i;
+	int	z;
+	int	y;
+	int	maxindb;
 
 	i = 0;
 	seq = ft_findsequence(a);
 	if (!seq)
 		return ("Error");
-
 	while (ft_lstsize(a->head) != arrlen(seq)) //PB all but sequence
 	{
-		if (ft_isseq(seq, a->head->index))
-			ft_ra(a);
-		else
+		while (ft_isseq(seq, a->head->index))
+		{
+			z = 0;
+			y = 0;
+			if (ft_checksort(a) && !b->head)
+				return ("");
+			if (b->head)
+				maxindb = ft_maxind(b);
+			if (b->head && b->head->next)
+			{
+				z = seq[0] - b->head->index;
+				y = seq[0] - b->head->next->index;
+			
+				if (z < 0)
+					z = -z;
+				if (y < 0)
+					y = -y;
+			}
+			if (z > y)
+				ft_rr(a,b);
+			else
+				ft_ra(a);
+		}
 			ft_pb(a, b);
 	}
-		// write (1, "y", 1);
-	while (b->head)
+	free(seq);
+	while (b->head) //get ptr to PA and rb or rrb 
 	{
-		// write (1, "b", 1);
 		if (b->head->next)
-		{
-			// write (1, "\ngonp\n", 6);
 			ptr = ft_nextpush(a, b);
-			// write (1, "\nexitnp\n", 8);
-		}
 		else if (!b->head->next)
-		{
 			ptr = b->head;
-		}
-			// write (1, "z", 1);
 		aptr = getaptr(a, ptr);
 		while(b->head != ptr)
 		{
 			if (ft_findnext(ptr->index, ptr->index, b))
-				ft_rb(b);
+			{
+				if (ft_findnext(aptr->index, aptr->index, a) && a->head != aptr)
+					ft_rr(a,b); 
+				else
+					ft_rb(b);
+			}
 			else
-				ft_rrb(b);
+			{
+				if (!ft_findnext(aptr->index, aptr->index, a) && a->head != aptr)
+					ft_rrr(a,b);
+				else
+					ft_rrb(b);
+			}
 		}
-		while (a->head != aptr)
+		while (a->head != aptr) //ra or rra to insert ptr
 		{
 			if (ft_findnext(aptr->index, aptr->index, a))
 				ft_ra(a);
@@ -216,7 +274,7 @@ char	*ft_algo2(t_stack *a, t_stack *b)
 		ft_pa(b, a);
 	}
 	// ft_printlist(a,b);
-	while (a->head->index != 0) //rotate or rev rotate dependeing on 0 idnex position in list. make ind 0 - head a
+	while (a->head->index != 0) //LASTrotate or rev rotate dependeing on 0 idnex position in list. make ind 0 - head a
 	{
 		if (ft_findnext(0, 0, a))
 			ft_ra(a);

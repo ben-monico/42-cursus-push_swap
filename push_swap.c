@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:10:26 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/19 18:06:21 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/20 13:40:36 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_algorithm(t_stack *a, t_stack *b)
 	// ft_printlist(a, b);
 	ft_setindex(a);
 	ft_algo2(a, b);
-	ft_sort(a, b);
+	// ft_sort(a, b);
 	return ;
 }
 

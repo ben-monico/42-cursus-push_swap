@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 17:05:28 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/15 16:30:31 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/20 17:20:31 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	ft_checksort(t_stack *stack)
 {
 	t_node	*ptr;
 	
-	ptr = ft_find_head(stack->head);
+	ptr = stack->head;
 	while (ptr)
 	{
 		if (ptr->next && ptr->nb > ptr->next->nb)
