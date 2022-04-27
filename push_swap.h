@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:57:03 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/19 17:51:16 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/27 16:34:36 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		ft_checksort(t_stack *stack);
 int		ft_dup_check(t_node *ptr);
 int		ft_findnext(int	mindex, int maxindex, t_stack *stack);
 t_node	*ft_find_head(t_node *ptr);
-t_node	*ft_find_index(t_node *ptr, int ind);
+t_node	*ft_find_index(t_stack *stack, int ind);
 t_node	*ft_find_tail(t_node *ptr);
 int		ft_free(char **str);
 int		ft_isdigit(int c);

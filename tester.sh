@@ -10,7 +10,7 @@ let j=100
 
 for ((i=0; i<j; i++))
 do
-	in=$(ruby -e "puts (0..500).to_a.shuffle.join(' ')")
+	in=$(ruby -e "puts (0..100).to_a.shuffle.join(' ')")
 	out=$(./push_swap $in)
 	num=$(echo $out | wc -w | xargs)
 	if ((num > max))
