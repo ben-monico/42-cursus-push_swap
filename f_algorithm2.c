@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:22:13 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/20 18:56:38 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/26 16:40:59 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,12 +203,12 @@ char	*ft_algo2(t_stack *a, t_stack *b)
 	t_node	*aptr;
 	// t_node	*next;
 	int *seq;
-	int i;
 	int	z;
 	int	y;
-	int	maxindb;
+	// int	maxindb;
 
-	i = 0;
+	if (a->head->nb > a->head->next->nb)
+		ft_sa(a);
 	seq = ft_findsequence(a);
 	if (!seq)
 		return ("Error");
@@ -220,8 +220,8 @@ char	*ft_algo2(t_stack *a, t_stack *b)
 			y = 0;
 			if (ft_checksort(a) && !b->head)
 				return ("");
-			if (b->head)
-				maxindb = ft_maxind(b);
+			// if (b->head)
+			// 	maxindb = ft_maxind(b);
 			if (b->head && b->head->next)
 			{
 				z = seq[0] - b->head->index;
