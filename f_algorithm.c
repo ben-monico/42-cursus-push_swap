@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:17:33 by benmonico         #+#    #+#             */
-/*   Updated: 2022/04/19 19:17:40 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/28 15:51:04 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,14 @@ void	ft_sort(t_stack *a, t_stack *b)
 
 	//iterate back and forth to find biggest sequence including 0. push all except those
 	//find cheapest next to push and ra or rra	
-	ptr = ft_find_index(a->head, 0);
+	ptr = ft_get_node(a, 0);
 	while (ptr) //push to b except for sequenced indexs.
 	{
 		if (ptr->index == mindex + 1)
 			mindex++;
 		ptr = ptr->next;
 	}
-	ptr = ft_find_index(a->head, 0);
+	ptr = ft_get_node(a, 0);
 	maxindex++;
 	while (ptr) //push to b except for sequenced indexs.
 	{
