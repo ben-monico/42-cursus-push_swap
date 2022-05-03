@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:10:26 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/20 13:40:36 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/05/03 18:17:06 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int main(int argc, char **argv)
 	}	
 	if (!(ft_parse_args(ps.a, argc, argv)))
 	{
-		ft_putstr("Parsing Error\n");
+		ft_putstr("Error\n");
 		free(ps.a);
 		free(ps.b);
 		return (0);
@@ -43,7 +43,6 @@ int main(int argc, char **argv)
 	if (ft_checksort(ps.a) || !ps.a->head->next)
 		return (0);
 	ft_algorithm(ps.a, ps.b);
-	ft_checksort(ps.a);
 	return (0);
  	// system("leaks -- a.out");
 }

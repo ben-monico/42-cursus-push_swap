@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 17:05:28 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/28 15:27:36 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/05/03 18:12:46 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,20 @@ int	ft_checksort(t_stack *stack)
 	while (ptr)
 	{
 		if (ptr->next && ptr->nb > ptr->next->nb)
+			return (0);
+		ptr = ptr->next;
+	}
+	return (1);
+}
+
+int	ft_check_invsort(t_stack *stack)
+{
+	t_node	*ptr;
+	
+	ptr = stack->head;
+	while (ptr)
+	{
+		if (ptr->next && ptr->nb < ptr->next->nb)
 			return (0);
 		ptr = ptr->next;
 	}

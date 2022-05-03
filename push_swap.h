@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:57:03 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/28 15:27:36 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/05/03 18:12:54 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,13 @@ typedef struct s_array {
 	int  max;
 } t_array;
 
-char 	*ft_algo2(t_stack *a, t_stack *b);
+int		ft_algo2(t_stack *a, t_stack *b);
 long	ft_atoi(const char *str);
 t_node	*ft_atoiton(char **str);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 int		ft_checksort(t_stack *stack);
+int		ft_check_invsort(t_stack *stack);
 int		ft_dup_check(t_node *ptr);
 int		ft_findnext(int	mindex, int maxindex, t_stack *stack);
 t_node	*ft_find_head(t_node *ptr);
