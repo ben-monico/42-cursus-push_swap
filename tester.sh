@@ -9,10 +9,11 @@ let minin=99999
 let j=100
 
 
+# system("leaks -- push_swap");
 
 for ((i=0; i<j; i++))
 do
-	in=$(ruby -e "puts (0..99).to_a.shuffle.join(' ')")
+	in=$(ruby -e "puts (0..499).to_a.shuffle.join(' ')")
 	out=$(./push_swap $in)
 	num=$(echo $out | wc -w | xargs)
 	if ((num > max))

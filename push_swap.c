@@ -6,15 +6,69 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:10:26 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/05/04 16:17:11 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/05/04 18:36:04 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_sort(t_stack *a, t_stack *b);
+void	ft_sort(t_stack *a, t_stack *b)
+{
+	if (!ft_setindex(a) || !ft_algorithm(a, b))
+		ft_putstr("Error\n");
+	return ;
+}
 
-int main(int argc, char **argv)
+void	ft_fill_qsort_arr(int *arr, t_stack *stack, t_node *ptr)
+{
+	int	i;
+
+	ptr = stack->head;
+	i = 0;
+	while (ptr)
+	{
+		arr[i] = ptr->nb;
+		ptr = ptr->next;
+		i++;
+	}
+	i = 0;
+	while (i < stack->size)
+	{
+		if (i < stack->size - 1 && arr[i] > arr[i + 1])
+		{
+			ft_swap_int(&arr[i], &arr[i + 1]);
+			i = 0;
+			continue ;
+		}
+		i++;
+	}
+	return ;
+}
+
+int	ft_setindex(t_stack *stack)
+{
+	t_node	*ptr;
+	int		*arr;
+	int		i;
+
+	arr = (int *)malloc(sizeof(int) * (stack->size));
+	if (!arr)
+		return (0);
+	ptr = stack->head;
+	ft_fill_qsort_arr(arr, stack, ptr);
+	while (ptr)
+	{
+		i = 0;
+		while (arr[i] != ptr->nb)
+			i++;
+		ptr->index = i;
+		ptr = ptr->next;
+	}
+	free(arr);
+	return (1);
+}
+
+int	main(int argc, char **argv)
 {
 	t_ps	ps;
 
@@ -35,13 +89,5 @@ int main(int argc, char **argv)
 	ft_lstclear(&ps.a->head);
 	free(ps.a);
 	free(ps.b);
- 	// system("leaks -- push_swap");
 	return (0);
-}
-
-void	ft_sort(t_stack *a, t_stack *b)
-{
-	ft_setindex(a);
-	ft_algorithm(a, b);
-	return ;
 }

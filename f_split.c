@@ -6,13 +6,13 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:07:52 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/12 14:25:13 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/05/04 18:41:35 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_node *ft_split_to_stack(int argc, char **argv)
+t_node	*ft_split_to_stack(int argc, char **argv)
 {
 	t_node	*node;
 	t_node	*head;
