@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:57:03 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/05/03 18:12:54 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/05/04 15:32:40 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_array {
 	int  max;
 } t_array;
 
-int		ft_algo2(t_stack *a, t_stack *b);
+int		ft_algorithm(t_stack *a, t_stack *b);
 long	ft_atoi(const char *str);
 t_node	*ft_atoiton(char **str);
 void	ft_bzero(void *s, size_t n);
@@ -53,14 +53,14 @@ void	*ft_calloc(size_t count, size_t size);
 int		ft_checksort(t_stack *stack);
 int		ft_check_invsort(t_stack *stack);
 int		ft_dup_check(t_node *ptr);
-int		ft_findnext(int	mindex, int maxindex, t_stack *stack);
+int		ft_get_rotdir(int	index, t_stack *stack);
 t_node	*ft_find_head(t_node *ptr);
 t_node	*ft_get_node(t_stack *stack, int ind);
 t_node	*ft_find_tail(t_node *ptr);
 int		ft_free(char **str);
 int		ft_isdigit(int c);
 void	ft_lstclear(t_node **lst);
-int		ft_lstsize(t_node *ptr);
+int		ft_lstsize(t_stack *stack);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 int		ft_parse_args(t_stack *a, int argc, char **argv);
 void	ft_printlist(t_stack *a, t_stack *b);

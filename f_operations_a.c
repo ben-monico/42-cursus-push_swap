@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:41:14 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/20 16:06:19 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/05/04 13:26:19 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,16 @@
 void	ft_swap(t_node *node)
 {
 	int	aux;
+	int	aux2;
 
-	if (!node || node->next == NULL)
+	if (!node || !node->next)
 		return;
 	aux = node->nb;
+	aux2 = node->index;
 	node->nb = node->next->nb;
+	node->index = node->next->index;
 	node->next->nb = aux;
+	node->next->index = aux2;
 }
 
 void	ft_push(t_stack *stack, t_stack *stackaux)

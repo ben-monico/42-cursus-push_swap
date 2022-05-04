@@ -6,18 +6,19 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 17:05:28 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/05/03 18:12:46 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/05/04 15:51:13 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_lstsize(t_node *ptr)
+int	ft_lstsize(t_stack *stack)
 {
-	int	lstsize;
+	t_node	*ptr;
+	int		lstsize;
 	
 	lstsize = 0;
-	ptr = ft_find_head(ptr);
+	ptr = stack->head;
 	while (ptr)
 	{
 		lstsize++;
@@ -65,20 +66,6 @@ int	ft_checksort(t_stack *stack)
 	return (1);
 }
 
-int	ft_check_invsort(t_stack *stack)
-{
-	t_node	*ptr;
-	
-	ptr = stack->head;
-	while (ptr)
-	{
-		if (ptr->next && ptr->nb < ptr->next->nb)
-			return (0);
-		ptr = ptr->next;
-	}
-	return (1);
-}
-
 t_node	*ft_get_node(t_stack *stack, int ind)
 {
 	t_node	*ptr;
@@ -108,15 +95,6 @@ void	ft_setindex(t_stack *stack)
 		ptr = ptr->next;
 		i++;
 	}
-	//
-	// ft_putstr("array: ");
-	// i = 0;
-	// while (i < stack->size)
-	// {
-	// 	ft_putnbr(arr[i]);
-	// 	i++;
-	// }
-	//
 	i = 0;
 	while (i < stack->size)
 	{
@@ -128,22 +106,6 @@ void	ft_setindex(t_stack *stack)
 		}
 		i++;
 	}
-	//
-	// ft_putstr("\n sorted array: ");
-	// i = 0;
-	// while (i < stack->size)
-	// {
-	// 	ft_putnbr(arr[i]);
-	// 	i++;
-	// }
-	// ft_putstr("\nindexs: ");
-	// ptr = stack->head;
-	// while (ptr)
-	// {
-	// 	ft_putnbr(ptr->index);
-	// 	ptr = ptr->next;
-	// }
-	//
 	ptr = stack->head;
 	while (ptr)
 	{
@@ -153,14 +115,6 @@ void	ft_setindex(t_stack *stack)
 		ptr->index = i;
 		ptr = ptr->next;
 	}
-	//
-	// ft_putstr("\nindexs sorted: ");
-	// ptr = stack->head;
-	// while (ptr)
-	// {
-	// 	ft_putnbr(ptr->index);
-	// 	ptr = ptr->next;
-	// }
-	//
+	free(arr);
 	return ;
 }

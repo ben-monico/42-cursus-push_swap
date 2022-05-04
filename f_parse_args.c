@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 15:12:28 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/18 16:19:26 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/05/04 14:07:38 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_parse_args(t_stack *a, int argc, char **argv)
 		ft_lstclear(&a->head);   
 		return (0);
 	}
-	a->size = ft_lstsize(a->head);
+	a->size = ft_lstsize(a);
 	a->tail = ft_find_tail(a->head);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:22:13 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/05/03 18:58:46 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/05/04 16:18:37 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	ft_minind(t_stack *stack)
 	return (minindex);
 }
 
-t_node	*ft_findnextmin(t_node *ptr)
+t_node	*ft_get_rotdirmin(t_node *ptr)
 {
 	t_node	*nextmin;
 	int		min;
@@ -146,7 +146,7 @@ int	ft_nodecounter(t_stack *stack, t_node *ptr, int i)
 	return (count);
 }
 
-t_node	*ft_nextpush(t_stack *a, t_stack *b)
+t_node	*ft_get_cheapest(t_stack *a, t_stack *b) //dep on smallest moves
 {
 	t_node	*bptr;
 	t_node 	*aptr;
@@ -164,8 +164,8 @@ t_node	*ft_nextpush(t_stack *a, t_stack *b)
 	while (bptr)
 	{
 		aptr = getaptr(a, bptr);
-		bcounter = ft_nodecounter(b, bptr, ft_findnext(bptr->index, bptr->index, b));
-		acounter = ft_nodecounter(a, aptr, ft_findnext(aptr->index, aptr->index, a));
+		bcounter = ft_nodecounter(b, bptr, ft_get_rotdir(bptr->index, b));
+		acounter = ft_nodecounter(a, aptr, ft_get_rotdir(aptr->index, a));
 		if (acounter + bcounter < cheap || cheap == -1)
 		{
 			cheap = acounter + bcounter;
@@ -176,39 +176,22 @@ t_node	*ft_nextpush(t_stack *a, t_stack *b)
 	return (chpptr);
 }
 
-t_node	*ft_get_next_unseq(t_stack *a, int *seq)
-{
-	t_node	*ptrh;
-	t_node	*ptrt;
-
-	ptrh = a->head;
-	ptrt = a->tail;
-	while (ptrh && ptrt)
-	{
-		if (!ft_isseq(seq, ptrh->index))
-			return (ptrh);
-		if (!ft_isseq(seq, ptrt->index))
-			return(ptrt);
-		ptrh = ptrh->next;
-		ptrt = ptrt->prev;
-	}
-	return (NULL);
-}
-
 int	ft_circsort(t_stack *a)
 {
 	t_node	*ptr;
 	int		maxind;
+	int		minind;
 
-	maxind = ft_maxind(a);
 	ptr = a->head;
+	maxind = ft_maxind(a);
+	minind = ft_minind(a);
 	while (ptr)
 	{
-		if (ptr->next && ptr->index == maxind && ptr->next->index != 0)
+		if (ptr->next && ptr->index == maxind && ptr->next->index != minind)
 			return (0);
 		else if (ptr->index != maxind && ptr->next && ptr->index > ptr->next->index)
 			return (0);
-		else if (ptr == a->tail && a->head->index != ptr->index + 1)
+		else if (ptr == a->tail && ptr->index > a->head->index)
 			return (0);
 		ptr = ptr->next;
 	}
@@ -240,192 +223,6 @@ int	ft_nbrs_nbtwn(t_stack *stack, int min, int ind, int max)
 	if (c >= 2)
 		return (1);
 	return (0);
-}
-
-int	*ft_findsequence2(t_stack *a) // best, missing arrlen
-{
-	t_node	*ptr;
-	t_node	*start;
-	int	*best;
-	int	*cur;
-	int	i;
-	int	z;
-
-	z = 0;
-
-	best = (int *)ft_calloc(a->size, sizeof(int));
-	if (!best)
-		return (NULL);
-	cur = (int *)ft_calloc(a->size, sizeof(int));
-	if (!cur)
-		return (NULL);
-	start = a->head;
-	while (start)
-	{
-		cur[0] = start->index;
-		ptr = start->next;
-		i = 1;
-		while (ptr)
-		{
-			if (ptr->index > cur[i - 1])
-			{
-				cur[i] = ptr->index;
-				// if (i >= 2)
-				// {
-				// 	if (ft_nbrs_nbtwn(a, cur[i - 2], cur[i - 1], cur[i])) //add bool for continue outer loop
-				// 	{
-				// 		i--;
-				// 		ptr = ft_get_node(a, cur[i])->next;
-				// 		continue ;
-				// 	}
-				// }
-				i++;
-			}
-			ptr = ptr->next;
-		}
-		if (arrlen(best) < arrlen(cur))
-		{
-			ft_memcpy(best, cur, (sizeof(int) * a->size));
-			best[a->size - 1] = 0;
-		}
-		ft_bzero(cur, sizeof(int) * a->size);
-		cur[0] = start->index;
-		ptr = start->next;
-		i = 1;
-		while (ptr)
-		{
-
-			if ((z == 0 && (ptr->index > cur[i - 1] || ptr->index == 0)) ||
-				(z == 1 && ptr->index > cur[i - 1] && ptr->index < cur[0]))
-			{
-				if (ptr->index == 0)
-				{
-					best[a->size - 1] = -1;	
-					z = 1;
-				}
-				cur[i] = ptr->index;
-				// if (i >= 2)
-				// {
-				// 	if (ft_nbrs_nbtwn(a, cur[i - 2], cur[i - 1], cur[i])) //add bool for continue outer loop
-				// 	{
-				// 		i--;
-				// 		ptr = ft_get_node(a, cur[i])->next;
-				// 		continue ;
-				// 	}
-				// }
-				i++;
-			}
-			ptr = ptr->next;
-		}
-		if (arrlen(best) < arrlen(cur))
-			ft_memcpy(best, cur, (sizeof(int) * a->size));
-		ft_bzero(cur, sizeof(int) * a->size);
-		start = start->next;
-	}
-	free (cur);
-	return (best);
-}
-
-int	*ft_findsequence3(t_stack *a) //let it choose between having 0 or not
-{
-	t_node	*ptr;
-	t_node	*start;
-	int	*best;
-	int	*cur;
-	int	i;
-	int	z;
-
-	best = (int *)ft_calloc(a->size, sizeof(int));
-	if (!best)
-		return (NULL);
-	cur = (int *)ft_calloc(a->size, sizeof(int));
-	if (!cur)
-		return (NULL);
-	start = a->head;
-	while (start)
-	{
-		cur[0] = start->index;
-		ptr = start->next;
-		i = 1;
-		while (ptr)
-		{
-			if (ptr->index > cur[i - 1])
-			{
-				cur[i] = ptr->index;
-				i++;
-			}
-			ptr = ptr->next;
-		}
-		if (arrlen(best) < arrlen(cur))
-			ft_memcpy(best, cur, (sizeof(int) * a->size));
-		ft_bzero(cur, sizeof(int) * a->size);
-		cur[0] = start->index;
-		ptr = start->next;
-		i = 1;
-		z = 0;
-		while (ptr)
-		{
-			if ((z == 0 && (ptr->index > cur[i - 1] || ptr->index == 0)) ||
-				(z == 1 && ptr->index > cur[i - 1] && ptr->index < cur[0]))
-			{
-				if (ptr->index == 0)
-					z = 1;
-				cur[i] = ptr->index;
-				i++;
-			}
-			ptr = ptr->next;
-		}
-		if (arrlen(best) < arrlen(cur))
-			ft_memcpy(best, cur, (sizeof(int) * a->size));
-		ft_bzero(cur, sizeof(int) * a->size);
-		start = start->next;
-	}
-	free (cur);
-	return (best);
-}
-
-int	*ft_findsequence(t_stack *a)
-{
-	t_node	*ptr;
-	t_node	*start;
-	int	*best;
-	int	*cur;
-	int	i;
-	int	z;
-
-	z = 0;
-
-	best = (int *)ft_calloc(a->size, sizeof(int));
-	if (!best)
-		return (NULL);
-	cur = (int *)ft_calloc(a->size, sizeof(int));
-	if (!cur)
-		return (NULL);
-	start = a->head;
-	while (start)
-	{
-		cur[0] = start->index;
-		ptr = start->next;
-		i = 1;
-		while (ptr)
-		{
-			if ((z == 0 && (ptr->index > cur[i - 1] || ptr->index == 0)) ||
-				(z == 1 && ptr->index > cur[i - 1] && ptr->index < cur[0]))
-			{
-				if (ptr->index == 0)
-					z = 1;
-				cur[i] = ptr->index;
-				i++;
-			}
-			ptr = ptr->next;
-		}
-		if (arrlen(best) < arrlen(cur))
-			ft_memcpy(best, cur, (sizeof(int) * a->size));
-		ft_bzero(cur, sizeof(int) * a->size);
-		start = start->next;
-	}
-	free (cur);
-	return (best);
 }
 
 int	*ft_findsequence1(t_stack *a)
@@ -484,13 +281,11 @@ int	*ft_findsequence1(t_stack *a)
 	return (best);
 }
 
-void ft_fix_offset(t_stack *a)
+void	ft_fix_offset(t_stack *a)
 {
-	if (ft_checksort(a))
-		return ;
 	while (a->head->index != 0)
 	{
-		if (ft_findnext(0, 0, a))
+		if (ft_get_rotdir(0, a))
 			ft_ra(a);
 		else
 			ft_rra(a);
@@ -507,9 +302,9 @@ void	ft_push_algo(t_stack *a, t_stack *b, int *seq)
 		amount = a->size * 0.5;
 	if (a->size > 200)
 		amount = a->size * 0.175;
-	while (ft_lstsize(a->head) != arrlen(seq))
+	while (ft_lstsize(a) != arrlen(seq))
 	{
-		if (ft_isseq(seq, a->head->index) || a->head->index < ft_lstsize(a->head) - amount)
+		if (ft_isseq(seq, a->head->index) || a->head->index < ft_lstsize(a) - amount)
 			ft_ra(a);
 		else
 			ft_pb(a, b);
@@ -517,90 +312,74 @@ void	ft_push_algo(t_stack *a, t_stack *b, int *seq)
 	return ;
 }
 
-void	ft_smol_nbr(t_stack *a, t_stack *b, int *seq)
+void	ft_smol_algo(t_stack *a, t_stack *b)
 {
-	int	seqsize;
-
-	seqsize = arrlen(seq);
-	while (!ft_circsort(a) && !b->head)
-	{
-		if (b->head && ft_isseq(seq, a->head->index) && b->head == a->head - 1)
-		{
-			ft_pa(b, a);
-			seq[arrlen(seq)] = b->head->index;
-		}
-		if (ft_isseq(seq, a->head->index))
-			ft_ra(a);
-		else
-			ft_pb(a, b);
-	}
-	return ;
+	while (ft_lstsize(a) > 3)
+		ft_pb(a,b);
+	if (!ft_circsort(a) && !ft_checksort(a))
+		ft_sa(a);
+		return ;
 }
 
-int	ft_algo2(t_stack *a, t_stack *b)
+void	ft_rotcrl(t_stack *a, t_stack *b, t_node *bptr, t_node *aptr)
 {
-	t_node	*ptr;
-	t_node	*aptr;
-	int *seq;
-	int	size;
-	size = a->size;
-
-	if (a->size == 3)
+	while(b->head != bptr)
 	{
-		while (1)
+		if (ft_get_rotdir(bptr->index, b))
 		{
-			if (ft_checksort(a))
-				break ;
-			if (!ft_circsort(a))
-				ft_sa(a);
+			if (ft_get_rotdir(aptr->index, a) && a->head != aptr)
+				ft_rr(a,b); 
 			else
-				ft_ra(a);
+				ft_rb(b);
 		}
-		return (0);
+		else
+		{
+			if (!ft_get_rotdir(aptr->index, a) && a->head != aptr)
+				ft_rrr(a,b);
+			else
+				ft_rrb(b);
+		}
 	}
-	seq = ft_findsequence1(a);
-	if (!seq)
-		return (1);
-	if (a->size <= 6)
-		ft_smol_nbr(a, b, seq);
-	else
-		ft_push_algo(a, b, seq);
-	free(seq);
+	return ;
+}
+
+void	ft_rotnpush(t_stack *a, t_stack *b)
+{
+	t_node	*bptr;
+	t_node	*aptr;
 	while (b->head) //get ptr to PA and rb or rrb 
 	{
 		if (b->head->next)
-			ptr = ft_nextpush(a, b);
+			bptr = ft_get_cheapest(a, b);
 		else if (!b->head->next)
-			ptr = b->head;
-		aptr = getaptr(a, ptr);
-		while(b->head != ptr)
-		{
-			if (ft_findnext(ptr->index, ptr->index, b))
-			{
-				if (ft_findnext(aptr->index, aptr->index, a) && a->head != aptr)
-					ft_rr(a,b); 
-				else
-					ft_rb(b);
-			}
-			else
-			{
-				if (!ft_findnext(aptr->index, aptr->index, a) && a->head != aptr)
-					ft_rrr(a,b);
-				else
-					ft_rrb(b);
-			}
-		}
+			bptr = b->head;
+		aptr = getaptr(a, bptr);
+		ft_rotcrl(a, b, bptr, aptr);
 		while (a->head != aptr) //ra or rra to insert ptr
 		{
-			if (ft_findnext(aptr->index, aptr->index, a))
+			if (ft_get_rotdir(aptr->index, a))
 				ft_ra(a);
 			else
 				ft_rra(a);
 		}
 		ft_pa(b, a);
 	}
-	// ft_printlist(a,b);
+	return ;
+}
+
+int	ft_algorithm(t_stack *a, t_stack *b)
+{
+	int *seq = NULL;
+
+	seq = ft_findsequence1(a);
+	if (!seq)
+		return (1);
+	if (a->size <= 5)
+		ft_smol_algo(a, b);
+	else
+		ft_push_algo(a, b, seq);
+	free(seq);
+	ft_rotnpush(a, b);
 	ft_fix_offset(a);
 	return (0);	
-		// ft_printlist(a, b);
 }
