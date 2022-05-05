@@ -6,20 +6,20 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 15:12:28 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/05/04 14:07:38 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/05/05 14:24:47 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-//review situations longer and smaller than max int. use strcmp, care for leading zeros
-int	ft_parse_args(t_stack *a, int argc, char **argv) 
+
+int	ft_parse_args(t_stack *a, int argc, char **argv)
 {
 	a->head = ft_split_to_stack(argc, argv);
 	if (!a->head)
 		return (0);
 	if (ft_dup_check(a->head))
 	{
-		ft_lstclear(&a->head);   
+		ft_lstclear(&a->head);
 		return (0);
 	}
 	a->size = ft_lstsize(a);
@@ -51,7 +51,7 @@ int	ft_strvalid(char **str)
 	return (1);
 }
 
-t_node *ft_atoiton(char **str)
+t_node	*ft_atoiton(char **str)
 {
 	static t_node	*tmp2;
 	t_node			*tmp;
@@ -79,7 +79,7 @@ int	ft_free(char **str)
 	int	j;
 
 	j = 0;
-	while(str[j])
+	while (str[j])
 	{
 		free(str[j]);
 		j++;

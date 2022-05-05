@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:17:33 by benmonico         #+#    #+#             */
-/*   Updated: 2022/05/04 18:47:44 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/05/05 14:31:06 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ static void	ft_rotcrl(t_stack *a, t_stack *b, t_node *bptr, t_node *aptr)
 		if (ft_get_rotdir(bptr->index, b))
 		{
 			if (ft_get_rotdir(aptr->index, a) && a->head != aptr)
-				ft_rr(a,b);
+				ft_rr(a, b);
 			else
 				ft_rb(b);
 		}
 		else
 		{
 			if (!ft_get_rotdir(aptr->index, a) && a->head != aptr)
-				ft_rrr(a,b);
+				ft_rrr(a, b);
 			else
 				ft_rrb(b);
 		}
@@ -86,7 +86,7 @@ int	ft_get_rotdir(int index, t_stack *stack)
 
 static void	ft_push_algo(t_stack *a, t_stack *b, int *seq)
 {
-	int amount;
+	int	amount;
 
 	amount = a->size;
 	if (a->size > 50)
@@ -95,7 +95,8 @@ static void	ft_push_algo(t_stack *a, t_stack *b, int *seq)
 		amount = a->size * 0.175;
 	while (ft_lstsize(a) != arrlen(seq))
 	{
-		if (ft_isseq(seq, a->head->index) || a->head->index < ft_lstsize(a) - amount)
+		if (ft_isseq(seq, a->head->index)
+			|| a->head->index < ft_lstsize(a) - amount)
 			ft_ra(a);
 		else
 			ft_pb(a, b);
@@ -105,7 +106,7 @@ static void	ft_push_algo(t_stack *a, t_stack *b, int *seq)
 
 int	ft_algorithm(t_stack *a, t_stack *b)
 {
-	int *seq;
+	int	*seq;
 
 	seq = ft_findsequence(a, a->head);
 	if (!seq)
@@ -117,5 +118,5 @@ int	ft_algorithm(t_stack *a, t_stack *b)
 	free(seq);
 	ft_rotnpush(a, b);
 	ft_fix_offset(a);
-	return (1);	
+	return (1);
 }

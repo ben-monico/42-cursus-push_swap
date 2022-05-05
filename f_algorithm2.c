@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:22:13 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/05/04 16:48:14 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/05/05 14:29:22 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 t_node	*getaptr(t_stack *a, t_node *bptr)
 {
-	t_node *aptr;
-	int	maxindex;
-	int	minindex;
+	t_node	*aptr;
+	int		maxindex;
+	int		minindex;
 
 	maxindex = ft_maxind(a);
 	minindex = ft_minind(a);
@@ -33,9 +33,9 @@ t_node	*getaptr(t_stack *a, t_node *bptr)
 	while (aptr->next)
 	{
 		if (aptr->prev)
-			if ((aptr->index > bptr->index && aptr->prev->index < bptr->index) ||
-				(maxindex < bptr->index && aptr->prev->index == maxindex))
-				break;
+			if ((aptr->index > bptr->index && aptr->prev->index < bptr->index)
+				|| (maxindex < bptr->index && aptr->prev->index == maxindex))
+				break ;
 		aptr = aptr->next;
 	}
 	return (aptr);
@@ -45,7 +45,7 @@ static int	ft_nodecounter(t_stack *stack, t_node *ptr, int i)
 {
 	t_node	*aux;
 	int		count;
-	
+
 	count = 0;
 	if (i == 1)
 		aux = stack->head;
@@ -67,7 +67,7 @@ static int	ft_nodecounter(t_stack *stack, t_node *ptr, int i)
 
 t_node	*ft_get_cheapest(t_stack *a, t_stack *b, t_node *bptr)
 {
-	t_node 	*aptr;
+	t_node	*aptr;
 	t_node	*chpptr;
 	int		bcounter;
 	int		acounter;
