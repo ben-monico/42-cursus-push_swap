@@ -1,6 +1,20 @@
 NAME = push_swap
 
-SRCS = 	$(wildcard *.c)
+SRCS = 	f_algorithm.c\
+        f_algorithm2.c\
+        f_algorithm3.c\
+        f_operations_a.c\
+        f_operations_b.c\
+        f_operations_c.c\
+        f_parse_args.c\
+        f_sequence.c\
+        f_split.c\
+        f_utils_a.c\
+        f_utils_b.c\
+        f_utils_c.c\
+        f_utils_libft_a.c\
+        f_utils_libft_b.c\
+        push_swap.c
 
 OBJS =	$(SRCS:.c=.o)
 

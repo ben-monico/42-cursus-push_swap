@@ -37,14 +37,6 @@ typedef struct s_pushswap
 	t_stack	*b;
 }	t_ps;
 
-typedef struct s_array {
-	int	*array;
-	int	size;
-	int	mean;
-	int	min;
-	int	max;
-}	t_array;
-
 int		ft_algorithm(t_stack *a, t_stack *b);
 int		arrlen(int *arr);
 long	ft_atoi(const char *str);
@@ -63,6 +55,8 @@ t_node	*ft_get_node(t_stack *stack, int ind);
 int		ft_get_rotdir(int index, t_stack *stack);
 t_node	*ft_find_tail(t_node *ptr);
 int		ft_free(char **str);
+t_node	*ft_initnode(int i);
+t_stack	*ft_initstack(int size);
 int		ft_isdigit(int c);
 int		ft_isseq(int *arr, int index);
 void	ft_lstclear(t_node **lst);
@@ -83,8 +77,6 @@ t_node	*ft_split_to_stack(int argc, char **argv);
 int		ft_strcmp(const char *s1, const char *s2);
 int		ft_strvalid(char **str);
 void	ft_swap_int(int *a, int *b);
-t_node	*ft_initnode(int i);
-t_stack	*ft_initstack(int size);
 
 void	ft_push(t_stack *stack, t_stack *stackaux);
 void	ft_rev_rotation(t_stack *stack);

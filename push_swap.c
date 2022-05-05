@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:10:26 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/05/04 18:36:04 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/05/05 15:06:47 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,11 @@ int	main(int argc, char **argv)
 {
 	t_ps	ps;
 
+	if (argc == 1)
+		return (0);
 	ps.a = ft_initstack(0);
 	ps.b = ft_initstack(0);
-	if (argc == 1 || !ps.a || !ps.b || !ft_parse_args(ps.a, argc, argv))
+	if (!ps.a || !ps.b || !ft_parse_args(ps.a, argc, argv))
 	{
 		ft_putstr("Error\n");
 		if (ps.a)

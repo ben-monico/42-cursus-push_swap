@@ -13,7 +13,7 @@ let j=100
 
 for ((i=0; i<j; i++))
 do
-	in=$(ruby -e "puts (0..4).to_a.shuffle.join(' ')")
+	in=$(ruby -e "puts (0..99).to_a.shuffle.join(' ')")
 	out=$(./push_swap $in)
 	num=$(echo $out | wc -w | xargs)
 	echo $out | tr ' ' '\n' | ./checker_Mac $in

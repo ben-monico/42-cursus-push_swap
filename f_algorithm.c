@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:17:33 by benmonico         #+#    #+#             */
-/*   Updated: 2022/05/05 14:31:06 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/05/05 15:14:48 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static void	ft_push_algo(t_stack *a, t_stack *b, int *seq)
 
 	amount = a->size;
 	if (a->size > 50)
-		amount = a->size * 0.5;
+		amount = a->size * 0.65;
 	if (a->size > 200)
 		amount = a->size * 0.175;
 	while (ft_lstsize(a) != arrlen(seq))
